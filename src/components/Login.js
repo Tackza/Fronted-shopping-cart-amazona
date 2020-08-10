@@ -1,8 +1,9 @@
 import React from 'react'
-import { Row, Col, Divider, Input, Button, Layout, Form, notification } from 'antd'
+import { Row, Col, Divider, Input, Button, Form, notification } from 'antd'
 import Title from 'antd/lib/skeleton/Title'
 import axios from '../config/axios'
 import localStorageService from '../service/localStorageService'
+import { withRouter } from 'react-router-dom'
 
 const layout = {
     labelCol: { xs: 24, sm: 5, md: 4, lg: 5, xl: 4, xxl: 3 },
@@ -19,12 +20,13 @@ function Login(props) {
         axios.post('/user/login', body)
             .then(result => {
                 localStorageService.setToken(result.data.accessToken)
-                console.log(result)
+                console.log(result.data)
                 props.setRole('user')
+                props.history.push("/")
             })
             .catch(err => {
                 notification.error({
-                    message: "Login false"
+                    message: "Login false.."
                 })
             })
     }
@@ -50,7 +52,7 @@ function Login(props) {
                     </Row>
                     <Form
                         className="App"
-                        {...Layout}
+                        {...layout}
                         onFinish={onFinish}
                         style={{ width: "70%" }}
                     >
@@ -81,4 +83,4 @@ function Login(props) {
     )
 }
 
-export default Login
+export default withRouter(Login)

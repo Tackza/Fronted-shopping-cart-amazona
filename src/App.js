@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
-import ListOrder from './components/ListOrder';
 import Login from './components/Login';
 import Register from './components/Register';
+import Cart from './components/Cart';
+import History from './components/History';
+import PrivateRoutes from './components/private-routes.js/PrivateRoutes';
+import localStorageService from './service/localStorageService';
 
 function App() {
+    const [role, setRole] = useState(localStorageService.getRole())
     return (
-        <BrowserRouter >
-            <div className="App" >
-                <Switch >
-                    <Route path="/order" >
-                        <ListOrder/>
+        <PrivateRoutes role={role} setRole={setRole} >
+
+            <BrowserRouter >
+                <Switch>
+                    <Route path="/cart" >
+                        <Cart />
                     </Route>
                     <Route path="/register" >
-                        <Register/>
+                        <Register />
                     </Route>
                     < Route path='/login' >
-                        <Login/>
+                        <Login />
+                    </Route>
+                    < Route path='/history' >
+                        <History />
                     </Route>
                     <Route path='/'>
-                        < Header />
+                        <Header />
                         <Home />
                     </Route>
                 </Switch>
-            </div>
-        </BrowserRouter>
+            </BrowserRouter>
+        </PrivateRoutes>
 
     );
 }

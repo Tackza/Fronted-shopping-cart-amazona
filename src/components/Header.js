@@ -24,8 +24,12 @@ function Header() {
             </Col>
             <Col span={2}>
                 <Link to='/login'>
-                    <div>Hello tack</div>
                     <div>sign In</div>
+                </Link>
+            </Col>
+            <Col span={2}>
+                <Link to='/history'>
+                    <div>Hello tack</div>
                 </Link>
             </Col>
             <Col span={2}>
@@ -34,7 +38,7 @@ function Header() {
                 </Link>
             </Col>
             <Col span={2}>
-                <Link to="/order">
+                <Link to="/cart">
                     <ShoppingCartOutlined />
                 </Link>
             </Col>

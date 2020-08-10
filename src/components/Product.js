@@ -15,7 +15,6 @@ function Product(props) {
         >
             <Meta title={props.item.name} />
             <p> ราคา {props.item.price} บาท </p>
-            {props.item.id}
             <Button onClick={() => props.addToOrder(props.id)}>Add To Cart</Button>
         </Card>
 

@@ -19,7 +19,7 @@ function Register(props) {
             password: values.password,
             name: values.nickname
         }
-        axios.post('users/register', body)
+        axios.post('user/register', body)
             .then(res => {
                 notification.success({
                     message: "Register Success"
