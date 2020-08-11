@@ -1,4 +1,4 @@
-import HomePage from '../App'
+import Home from '../components/Home'
 import CartPage from '../components/Cart'
 import HistoryPage from '../components/History'
 import LoginPage from '../components/Login'
@@ -7,7 +7,7 @@ import RegisterPage from '../components/Register'
 const components = {
     home: {
         url: '/',
-        component: HomePage
+        component: Home
     },
     cart: {
         url: '/cart',
@@ -34,12 +34,13 @@ export default {
             components.register,
             components.home
         ],
-        redirectRoutes : '/'
+        redirectRoutes : '/login'
     },
     user : {
         allowedRoutes : [
             components.cart,
-            components.history
+            components.history,
+            components.home
         ],
         redirectRoutes : '/'
     }

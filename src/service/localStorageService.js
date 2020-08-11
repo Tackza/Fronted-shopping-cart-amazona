@@ -3,7 +3,7 @@ const setToken = (token) => {
 }
 
 const getToken = () => {
-    return localStorage.getItem('ACCESS_TOEKN')
+    return localStorage.getItem('ACCESS_TOKEN')
 }
 
 const removeToken = () => {

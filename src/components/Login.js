@@ -12,7 +12,7 @@ const layout = {
 
 function Login(props) {
 
-    const onFinish = values => {
+    const onFinish = (values) => {
         const body = {
             username: values.username,
             password: values.password

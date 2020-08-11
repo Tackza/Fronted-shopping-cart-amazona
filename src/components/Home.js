@@ -13,13 +13,17 @@ function Home() {
         const product = products.data[idx]
         const carts = await axios.get('/cart')
         const cart = carts.data
+        // console.log(product)
         // console.log(cart)
-        let index = cart.findIndex(item => item.product_name == product.name)
+        const product_id = product.id //1
+        let index = cart.findIndex(item => item.product_id === product.id)
+        // console.log(index)
+         console.log(cart[index])
         if (index !== -1) {
-            const { total_product, id } = cart[index]
-            // console.log(cart[index])
+            const { amount, id } = cart[index]
+            console.log(id)
             const item = await axios.put('/cart', {
-                total_product: total_product + 1,
+                amount: amount + 1,
                 id
             })
             console.log("put success")
@@ -27,20 +31,19 @@ function Home() {
         } else {
             const item = await axios.post('/cart/OrderProduct',
                 {
-                    total_product: 1,
-                    total_price: product.price,
-                    status: "pending",
-                    product_name: product.name
+                    amount: 1,
+                    product_id
                 })
             console.log("post success")
             console.log(item)
         }
+
     }
 
     const fetchProduct = async () => {
         const httpResponse = await axios.get('/product')
         setProduct(httpResponse.data)
-        // console.log(product)
+        // console.log(httpResponse)
     }
 
     useEffect(() => {

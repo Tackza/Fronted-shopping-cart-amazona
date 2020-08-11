@@ -1,5 +1,6 @@
 import React from 'react'
 import configRoutes from '../../config/routes'
+import Header from '../Header'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 
@@ -7,6 +8,8 @@ function PrivateRoutes(props) {
     const role = props.role || 'guest'
     const allowedRoutes = configRoutes[role].allowedRoutes
     const redirectRoutes = configRoutes[role].redirectRoutes
+    console.log(allowedRoutes)
+    console.log(redirectRoutes)
     return (
         <Switch>
             {allowedRoutes.map(route => (
@@ -15,6 +18,7 @@ function PrivateRoutes(props) {
                     key={route.url}
                     exact
                 >
+                    <Header />
                     <route.component setRole={props.setRole} />
                 </Route>
             ))}
