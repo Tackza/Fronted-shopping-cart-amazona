@@ -1,6 +1,6 @@
 import React from 'react'
 import configRoutes from '../../config/routes'
-import Header from '../Header'
+// import Header from '../Header'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 

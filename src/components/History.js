@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from '../config/axios'
+import Header from './Header'
 
 
 
 function History(props) {
     const [history, setHistory] = useState([])
+
+    const newTime = history
+    console.log(newTime)
     
     useEffect(() => {
         fetchListOrder()
@@ -17,9 +21,11 @@ function History(props) {
     console.log(history)
     return (
         <div>
+            <Header/>
             {history.map(item => (
                 <>
                     <div>{item.product_name}</div>
+                    <p>{item.createdAt}</p>
                 </>
             ))}
         </div>

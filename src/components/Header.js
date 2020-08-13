@@ -9,7 +9,6 @@ import localStorageService from '../service/localStorageService'
 
 function Header(props) {
     const [name, setName] = useState('')
-    const [id, setId] = useState(0)
 
     const logout = () => {
         localStorageService.removeToken()
@@ -22,7 +21,6 @@ function Header(props) {
         if (token) {
             const user = jwtDecode(token)
             setName(user.name)
-            setId(user.id)
         }
     }, [])
 

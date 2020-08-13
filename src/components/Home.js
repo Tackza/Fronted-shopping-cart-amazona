@@ -6,7 +6,7 @@ import axios from '../config/axios'
 import Header from './Header'
 
 const contentStyle = {
-    height: '450px',
+    height: '500px',
     color: '#fff',
     lineHeight: '180px',
     textAlign: 'center',
@@ -20,7 +20,7 @@ function Home(props) {
 
     const addToOrder = async (item) => {
         console.log(item)
-        const { id, name, amount } = item;
+        const { id, name } = item;
         await axios.put('/cart', {
             amount: 1,
             id,
