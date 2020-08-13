@@ -32,7 +32,6 @@ export default {
         allowedRoutes : [
             components.login,
             components.register,
-            components.home
         ],
         redirectRoutes : '/login'
     },

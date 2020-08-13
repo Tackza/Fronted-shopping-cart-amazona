@@ -3,7 +3,7 @@ import { Row, Col, Divider, Input, Button, Form, notification } from 'antd'
 import Title from 'antd/lib/skeleton/Title'
 import axios from '../config/axios'
 import localStorageService from '../service/localStorageService'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 const layout = {
     labelCol: { xs: 24, sm: 5, md: 4, lg: 5, xl: 4, xxl: 3 },
@@ -22,7 +22,7 @@ function Login(props) {
                 localStorageService.setToken(result.data.accessToken)
                 console.log(result.data)
                 props.setRole('user')
-                props.history.push("/")
+                // props.history.push("/")
             })
             .catch(err => {
                 notification.error({
@@ -75,6 +75,11 @@ function Login(props) {
                         <Button className="Button" type="primary" htmlType="submit">
                             Submit
                         </Button>
+                        <Link to="/register">
+                            <Button className="Button" type="primary" htmlType="submit">
+                                Register
+                        </Button>
+                        </Link>
 
                     </Form>
                 </div>

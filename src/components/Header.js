@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom'
 import Search from 'antd/lib/input/Search'
 import { Row, Col } from 'antd'
 import { ShoppingCartOutlined } from '@ant-design/icons'
+import jwtDecode from 'jwt-decode'
+import localStorageService from '../service/localStorageService'
 
-function Header() {
+function Header(props) {
+    const [name, setName] = useState('')
+    const [id, setId] = useState(0)
+
+    const logout = () => {
+        localStorageService.removeToken()
+        props.setRole('guest')
+    }
+
+
+    useEffect(() => {
+        const token = localStorageService.getToken()
+        if (token) {
+            const user = jwtDecode(token)
+            setName(user.name)
+            setId(user.id)
+        }
+    }, [])
+
     return (
         <Row gutter={24} className="header" >
             <Col span={4}>
@@ -22,19 +42,15 @@ function Header() {
                     onSearch={value => console.log(value)}
                 />
             </Col>
-            <Col span={2}>
-                <Link to='/login'>
-                    <div>sign In</div>
-                </Link>
-            </Col>
+
             <Col span={2}>
                 <Link to='/history'>
-                    <div>Hello tack</div>
+                    <div>Hello {name}</div>
                 </Link>
             </Col>
             <Col span={2}>
-                <Link to="/register">
-                    <div>register</div>
+                <Link onClick={logout} to='/'>
+                    <div>Logout</div>
                 </Link>
             </Col>
             <Col span={2}>

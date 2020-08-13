@@ -4,21 +4,23 @@ import { notification } from 'antd';
 
 axios.defaults.baseURL = "http://localhost:8000";
 
-const token = localStorageService.getToken()
 
 axios.interceptors.request.use(
-    
+
     config => {
         if (config.url.includes('/login') || config.url.includes('/register')) {
             return config
         }
-      console.log(token);
+
+        const token = localStorageService.getToken()
+        console.log(token);
+        
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`
-        } 
-    
-            return config
-        
+        }
+
+        return config
+
     },
     err => {
         Promise.reject(err)

@@ -3,7 +3,7 @@ import axios from '../config/axios'
 
 
 
-function History() {
+function History(props) {
     const [history, setHistory] = useState([])
     
     useEffect(() => {
@@ -11,11 +11,12 @@ function History() {
     }, [])
 
     const fetchListOrder = async () => {
-        const httpResponse = await axios.get('/order')
+        const httpResponse = await axios.get('/history')
         setHistory(httpResponse.data)
     }
+    console.log(history)
     return (
-        <div>32132121321
+        <div>
             {history.map(item => (
                 <>
                     <div>{item.product_name}</div>

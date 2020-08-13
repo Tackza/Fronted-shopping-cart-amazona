@@ -4,18 +4,18 @@ import Meta from 'antd/lib/card/Meta'
 
 
 function Product(props) {
-
+    const {  image, name, price  } = props.item;
 
     return (
 
         <Card
             hoverable
             style={{ width: 240 }}
-            cover={<img alt="example" src={props.item.image} />}
+            cover={<img alt="example" src={image} />}
         >
-            <Meta title={props.item.name} />
-            <p> ราคา {props.item.price} บาท </p>
-            <Button onClick={() => props.addToOrder(props.id)}>Add To Cart</Button>
+            <Meta title={name} />
+            <p> ราคา {price} บาท </p>
+            <Button onClick={() => props.addToOrder(props.item)}>Add To Cart</Button>
         </Card>
 
     )

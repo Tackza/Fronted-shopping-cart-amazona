@@ -18,7 +18,7 @@ function PrivateRoutes(props) {
                     key={route.url}
                     exact
                 >
-                    <Header />
+                   
                     <route.component setRole={props.setRole} />
                 </Route>
             ))}
