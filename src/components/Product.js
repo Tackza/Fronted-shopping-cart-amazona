@@ -14,7 +14,7 @@ function Product(props) {
             cover={<img alt="example" src={image} />}
         >
             <Meta title={name} />
-            <p> ราคา {price} บาท </p>
+            <p>ราคา {Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(price)} </p>
             <Button onClick={() => props.addToOrder(props.item)}>Add To Cart</Button>
         </Card>
 

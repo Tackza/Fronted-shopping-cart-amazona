@@ -1,19 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './Header.css'
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import Search from 'antd/lib/input/Search'
-import { Row, Col } from 'antd'
-import { ShoppingCartOutlined } from '@ant-design/icons'
+import { Row, Col, Button } from 'antd'
+import { ShoppingCartOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import jwtDecode from 'jwt-decode'
 import localStorageService from '../service/localStorageService'
+import { SearchContext } from '../contexts/SearchContext'
+import Avatar from 'antd/lib/avatar/avatar'
+
+
 
 function Header(props) {
     const [name, setName] = useState('')
 
+
+    const { searchTerm: [searchTerm, setSearchTerm] } = useContext(SearchContext);
+
     const logout = () => {
         localStorageService.removeToken()
         props.setRole('guest')
+
     }
+
+
 
 
     useEffect(() => {
@@ -26,34 +36,51 @@ function Header(props) {
 
     return (
         <Row gutter={24} className="header" >
-            <Col span={4}>
-                <Link to='/'>
-                    <img className="header_logo"
-                        src="https://innovation-amazon.com/src/img/amazonbialynapis-01.svg" />
+            <Col span={2} >
+                <Link to='/' >
+                    <Row style={{ justifyContent: "center", textAlign: "center" }}>
+                        <img className="header_logo"
+                            src="https://i.ibb.co/dPQT5GK/pngegg.png" alt="pngegg" border="0" style={{ width: "50%" }} />
+
+                    </Row>
                 </Link>
             </Col>
-            <Col span={14}>
+            <Col span={16}>
                 <Search className="searchBox"
                     placeholder="input search text"
                     enterButton="Search"
                     size="large"
-                    onSearch={value => console.log(value)}
+                    onSearch={value => setSearchTerm(value)}
                 />
             </Col>
+            {/* <Link to='/history'> */}
+                {/* <Col span={1} style={{ marginTop: "5px" }}>
+                </Col> */}
+            {/* </Link> */}
+            <Col span={2}>
+                <Link to='/history' >
+                    <Row >
+                        <Col style={{
+                            justifyContent: "center",
+                            width: "100px",
+                            textAlign: "center",
+                            marginTop: "3px"
+                        }}>
+                        <Avatar size="small" icon={<UserOutlined />} />
+                            <div>{name}</div>
+                        </Col>
+                    </Row>
 
-            <Col span={2}>
-                <Link to='/history'>
-                    <div>Hello {name}</div>
+                </Link>
+            </Col>
+            <Col span={2} >
+                <Link to="/cart" >
+                    <ShoppingCartOutlined className="cartIcon" style={{ fontSize: '30px' ,color: "white",marginLeft:"15px"}} />
                 </Link>
             </Col>
             <Col span={2}>
-                <Link onClick={logout} to='/'>
-                    <div>Logout</div>
-                </Link>
-            </Col>
-            <Col span={2}>
-                <Link to="/cart">
-                    <ShoppingCartOutlined />
+                <Link to="/login" onClick={logout}>
+                    <LogoutOutlined className="logoutButton" style={{ color: "red", fontSize: '25px' }} />
                 </Link>
             </Col>
         </Row >
@@ -61,4 +88,4 @@ function Header(props) {
 
 }
 
-export default Header
+export default withRouter(Header)

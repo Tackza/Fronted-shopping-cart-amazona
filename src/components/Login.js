@@ -1,9 +1,9 @@
 import React from 'react'
 import { Row, Col, Divider, Input, Button, Form, notification } from 'antd'
-import Title from 'antd/lib/skeleton/Title'
 import axios from '../config/axios'
 import localStorageService from '../service/localStorageService'
 import { withRouter, Link } from 'react-router-dom'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 const layout = {
     labelCol: { xs: 24, sm: 5, md: 4, lg: 5, xl: 4, xxl: 3 },
@@ -32,56 +32,70 @@ function Login(props) {
     }
 
     return (
-        <Row justify="center">
-            <Col xl={12}>
-                <Row justify="center">
-                    <Title level={10} className="Title">
-                        Logo
-                    </Title>
-                    <Divider className="Divider" />
+        <Row justify="center" align="middle" style={{ height: "100%" }}>
+            <Col xs={12} sm={23} lg={12} >
+                <Row justify="center" style={{ margin: "100px" }}>
+                    <img src="https://i.ibb.co/dPQT5GK/pngegg.png" alt="pngegg" border="0"
+                        style={{ width: "100%", maxWidth: "250px" }} />
+
                 </Row>
             </Col>
 
-            <Col xs={23} sm={23} md={23} lg={14} xl={12} xxl={12}>
+            <Col xs={12} sm={23} lg={10} justify="center" align="middle" style={{ height: "100%" }} >
                 <div className="Form">
                     <Row justify="center">
-                        <Title level={2} className="Title">
-                            login
-                    </Title>
-                        <Divider className="Divider" />
+                        <Form
+                       
+                       className="App"
+                       {...layout}
+                       onFinish={onFinish}
+                       style={{ width: "100%", 
+                       justifyContent: "center",
+                            border : "1px solid black",
+                            borderColor : "#e1e1e1",
+                            height: "300px"
+                        }}
+                        className="loginUsername"
+                        
+                        >
+                        <h1 style={{marginTop : "20px"}}>Sign-In</h1>
+                            <Form.Item
+                                name="username"
+                                rules={[{ required: true, message: 'Please input your username!' }]}
+                            >
+                                <Input prefix={<UserOutlined className="site-form-item-icon" />}
+                                    placeholder="Username"
+                                    style={{ marginLeft: "50px",
+                                     marginTop : "50px"}}
+                                />
+                            </Form.Item>
+
+                            <Form.Item
+                                name="password"
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                            >
+                                <Input.Password
+                                    prefix={<LockOutlined className="site-form-item-icon" />}
+                                    placeholder="Password"
+                                    style={{ marginLeft: "50px" }} />
+                            </Form.Item>
+
+                            <Row style={{ marginLeft: '80px' }} >
+                                <Button className="login-form-button"  htmlType="submit" style={{ width: '300px' ,backgroundColor:"orange",color: "white"}}>
+                                    Continue
+                                </Button>
+                            </Row>
+                        </Form>
+                        <br />
+                        <Divider plain>New To Amazona</Divider>
+                        <Row style={{ marginLeft: "5px" }}>
+                            <Link to="/register">
+                                <Button className="Button" htmlType="submit" style={{width : "300px",backgroundColor :"gray",color: "white"}}>
+                                    Create your Amazona account
+                                    </Button>
+                            </Link>
+                        </Row>
                     </Row>
-                    <Form
-                        className="App"
-                        {...layout}
-                        onFinish={onFinish}
-                        style={{ width: "70%" }}
-                    >
-                        <Form.Item
-                            label="Username"
-                            name="username"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
-                        >
-                            <Input />
-                        </Form.Item>
-
-                        <Form.Item
-                            label="Password"
-                            name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-
-                        <Button className="Button" type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                        <Link to="/register">
-                            <Button className="Button" type="primary" htmlType="submit">
-                                Register
-                        </Button>
-                        </Link>
-
-                    </Form>
                 </div>
             </Col>
         </Row>

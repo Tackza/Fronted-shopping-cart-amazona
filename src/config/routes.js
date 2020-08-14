@@ -3,6 +3,7 @@ import CartPage from '../components/Cart'
 import HistoryPage from '../components/History'
 import LoginPage from '../components/Login'
 import RegisterPage from '../components/Register'
+import BuySuccessPage from '../components/BuySuccess'
 
 const components = {
     home: {
@@ -24,6 +25,10 @@ const components = {
     register : {
         url : '/register',
         component : RegisterPage
+    },
+    buySuccess : {
+        url : '/success',
+        component : BuySuccessPage
     }
 }
 
@@ -39,7 +44,8 @@ export default {
         allowedRoutes : [
             components.cart,
             components.history,
-            components.home
+            components.home,
+            components.buySuccess
         ],
         redirectRoutes : '/'
     }

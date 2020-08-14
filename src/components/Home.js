@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './Home.css'
 import { Row, Col, Carousel, notification } from 'antd'
 import Product from './Product'
 import axios from '../config/axios'
 import Header from './Header'
+import {SearchContext} from '../contexts/SearchContext'
 
 const contentStyle = {
     height: '500px',
@@ -17,6 +18,9 @@ const contentStyle = {
 
 function Home(props) {
     const [product, setProduct] = useState([])
+
+    const {searchTerm: [searchTerm, setSearchTerm]} = useContext(SearchContext);
+    
 
     const addToOrder = async (item) => {
         console.log(item)
@@ -33,22 +37,20 @@ function Home(props) {
                 `${name}`,
         });
 
-    }
-
-    const fetchProduct = async () => {
-        const httpResponse = await axios.get('/product')
-        setProduct(httpResponse.data)
-        // console.log(httpResponse)
-    }
+    }   
 
     useEffect(() => {
+        const fetchProduct = async () => {
+            const httpResponse = await axios.get(`/product/?name=${searchTerm}`)
+            setProduct(httpResponse.data)
+        }
         fetchProduct()
-    }, [])
+    }, [searchTerm])
 
     return (
         <Row justify="space-between">
             <Col span={24}>
-                <Header setRole={props.setRole} />
+                <Header setRole={props.setRole}  />
             </Col>
             <Col span={24}>
                 <Carousel autoplay>
@@ -68,7 +70,7 @@ function Home(props) {
 
             </Col>
             {product.map((item, idx) =>
-                <Col xs={24} sm={12} md={8} lg={6} xl={6}>
+                <Col xs={24} sm={12} md={8} lg={6} xl={6} key={item.id}>
                     <Row justify="center">
                         <Product item={item} addToOrder={addToOrder} />
                     </Row>

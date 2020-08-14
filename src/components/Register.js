@@ -34,18 +34,13 @@ function Register(props) {
     }
 
     return (
-        <Row justify="center" >
-            <Col xs={23} sm={23} md={23} lg={14} xl={14} xxl={12}>
+        <Row justify="center" align="middle" style={{ height: "100%" }}>
+            <Col xs={23} sm={23} md={23} lg={14} xl={14} xxl={12} >
                 <div
                     className="Form"
                 >
-                    <Row justify="center">
-                        <Title level={2} className="Title">
-                            Register
-                    </Title>
-                    </Row>
-                    <Divider className="Divider" />
-                    <Form
+                    
+                    <Form justify="center" align="middle" style={{ height: "100%" }}
                         {...layout}
                         onFinish={onFinish}
                         style={{ width: "100%" }}
@@ -112,9 +107,12 @@ function Register(props) {
                             <Input />
                         </Form.Item>
 
-                        <Button className="Button" type="primary" htmlType="submit">
-                            Register
+                        <Row style={{ justifyContent: 'center' }}>
+                            <Button className="Button" type="primary" htmlType="submit" style={{width : "100px"}}>
+                                Register
                         </Button>
+
+                        </Row>
                     </Form>
                 </div>
             </Col>

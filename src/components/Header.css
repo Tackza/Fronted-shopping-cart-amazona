@@ -10,3 +10,14 @@
 .searchBox {
     margin-top: 5px;
 }
+
+.logoutButton{
+    font-size: 30px;
+    position: relative;
+    top:10px;
+    /* background-color: red; */
+}
+.cartIcon{
+    position : relative;
+    top : 5px;
+}
