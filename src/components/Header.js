@@ -53,10 +53,7 @@ function Header(props) {
                     onSearch={value => setSearchTerm(value)}
                 />
             </Col>
-            {/* <Link to='/history'> */}
-                {/* <Col span={1} style={{ marginTop: "5px" }}>
-                </Col> */}
-            {/* </Link> */}
+          
             <Col span={2}>
                 <Link to='/history' >
                     <Row >

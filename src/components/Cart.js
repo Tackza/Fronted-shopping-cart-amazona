@@ -51,11 +51,12 @@ function Cart(props) {
 
     useEffect(() => {
         fetchListOrder()
+       
     }, [])
 
     return (
         <div>
-            <Header />
+            <Header setRole={props.setRole} />
             
             <Row justify='center' >
                 <Col offset={1} xs={13}>

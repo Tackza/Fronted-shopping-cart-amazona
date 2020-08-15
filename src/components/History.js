@@ -29,7 +29,7 @@ function History(props) {
     console.log(history)
     return (
         <div>
-            <Header/>
+            <Header setRole={props.setRole} />
             <Col xs={18} offset={3}>
             <List
                             itemLayout="horizontal"

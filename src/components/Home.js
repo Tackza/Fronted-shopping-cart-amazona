@@ -69,7 +69,7 @@ function Home(props) {
                 </Carousel>,
 
             </Col>
-            {product.map((item, idx) =>
+            {product.map((item) =>
                 <Col xs={24} sm={12} md={8} lg={6} xl={6} key={item.id}>
                     <Row justify="center">
                         <Product item={item} addToOrder={addToOrder} />
