@@ -53,6 +53,7 @@ function Cart(props) {
         fetchListOrder()
        
     }, [])
+    console.log(cart)
 
     return (
         <div>

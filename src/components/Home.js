@@ -18,7 +18,6 @@ const contentStyle = {
 
 function Home(props) {
     const [product, setProduct] = useState([])
-
     const {searchTerm: [searchTerm, setSearchTerm]} = useContext(SearchContext);
     
 

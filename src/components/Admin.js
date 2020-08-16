@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Input, Select, Form, notification, Button, Row, Col, Menu } from 'antd';
 import Header from './Header';
-import { LockOutlined, MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined, AppstoreOutlined, WalletOutlined, GiftOutlined, TeamOutlined } from '@ant-design/icons';
 import axios from '../config/axios';
 import GetProductAdmin from './GetProductAdmin';
 import GetTotalSale from './GetTotalSale';
+import Member from './Member';
 
 const { SubMenu } = Menu;
 
@@ -89,7 +90,7 @@ function Admin(props) {
 
     const updateProduct = (
         <Row >
-            <Col offset={1} >
+            <Col offset={1}>
                 <GetProductAdmin />
             </Col>
         </Row >
@@ -97,35 +98,39 @@ function Admin(props) {
 
     const totalSale = (
         <Row>
-            <Col>
-            <GetTotalSale />
+            <Col offset={1}>
+                <GetTotalSale />
             </Col>
         </Row>
 
     )
 
-    const tabComponent = [addProduct, updateProduct, totalSale]
+    const totalMember = (
+        <Row>
+            <Col offset={1}>
+                <Member />
+            </Col>
+        </Row>
+    )
+
+    const tabComponent = [addProduct, updateProduct, totalSale, totalMember]
     return (
         <>
             <Header setRole={props.setRole} />
             <Row>
 
-                <Col lg={5}>
+                <Col lg={6}>
                     <Menu onClick={handleClick} style={{ width: 256 }} mode="vertical">
-                        <SubMenu key="sub1" icon={<MailOutlined />} title="Product">
+                        <SubMenu key="sub1" icon={<GiftOutlined />} title="Product">
                             <Menu.Item key="9" onClick={() => setIndex(0)}>Add Product</Menu.Item>
                             <Menu.Item key="10" onClick={() => setIndex(1)}>Update Product</Menu.Item>
                         </SubMenu>
-                        <Menu.Item key="sub2" icon={<AppstoreOutlined />} title="Total sale" onClick={() => setIndex(2)}>
-                        Total sale
-                        </Menu.Item>
-                        <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-
-                        </SubMenu>
+                        <Menu.Item key="12" icon={<TeamOutlined />} title="Total membership" onClick={() => setIndex(3)}>Total membership</Menu.Item>
+                        <Menu.Item key="11" icon={<WalletOutlined />} title="Total sale" onClick={() => setIndex(2)}>Total sale</Menu.Item>
                     </Menu>
                 </Col>
 
-                <Col lg={19}>
+                <Col lg={15}>
                     {tabComponent[index]}
                 </Col>
             </Row>
