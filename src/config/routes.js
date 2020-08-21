@@ -5,6 +5,8 @@ import LoginPage from '../components/Login'
 import RegisterPage from '../components/Register'
 import BuySuccessPage from '../components/BuySuccess'
 import AdminPage from '../components/Admin'
+import LoginForAdminPage from '../components/LoginForAdmin'
+
 
 const components = {
     home: {
@@ -34,6 +36,10 @@ const components = {
     admin : {
         url : '/admin',
         component : AdminPage
+    },
+    loginAdmin : {
+        url : '/login/admin',
+        component : LoginForAdminPage
     }
 }
 
@@ -42,6 +48,7 @@ export default {
         allowedRoutes : [
             components.login,
             components.register,
+            components.loginAdmin
         ],
         redirectRoutes : '/login'
     },
@@ -51,13 +58,14 @@ export default {
             components.history,
             components.home,
             components.buySuccess,
-            components.admin,
+           
         ],
         redirectRoutes : '/'
     },
     admin : {
         allowedRoutes : [
             components.home,
+            components.admin,
         ],
         redirectRoutes : '/'
     }

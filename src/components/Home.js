@@ -22,7 +22,6 @@ function Home(props) {
     
 
     const addToOrder = async (item) => {
-        console.log(item)
         const { id, name } = item;
         await axios.put('/cart', {
             amount: 1,

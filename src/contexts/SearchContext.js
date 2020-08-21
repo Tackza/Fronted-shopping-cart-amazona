@@ -4,8 +4,10 @@ export const SearchContext = React.createContext();
 
 export const SearchContextProvider = ({children}) => {
     const [searchTerm, setSearchTerm] = useState('');
+    let test = false
     const store = {
-        searchTerm: [searchTerm, setSearchTerm]
+        test,
+        searchTerm: [searchTerm, setSearchTerm],
         
     }
     

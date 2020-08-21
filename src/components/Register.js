@@ -35,16 +35,18 @@ function Register(props) {
 
     return (
         <Row justify="center" align="middle" style={{ height: "100%" }}>
-            <Col xs={23} sm={23} md={23} lg={14} xl={14} xxl={12} >
+            <Col xs={23} sm={23} md={23} lg={14} xl={14} xxl={12}  >
                 <div
                     className="Form"
                 >
-                    
                     <Form justify="center" align="middle" style={{ height: "100%" }}
                         {...layout}
                         onFinish={onFinish}
-                        style={{ width: "100%" }}
+                        style={{ width: "100%" ,
+                        justifyContent: "center"}}
+                        
                     >
+                        <h1 style={{marginTop : "20px"}}>Register</h1>
                         <Form.Item
                             name="email"
                             label="E-mail"

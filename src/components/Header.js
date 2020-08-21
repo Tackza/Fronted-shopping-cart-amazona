@@ -13,26 +13,72 @@ import Avatar from 'antd/lib/avatar/avatar'
 
 function Header(props) {
     const [name, setName] = useState('')
-
-
+    const [status, setStatus] = useState('')
     const { searchTerm: [searchTerm, setSearchTerm] } = useContext(SearchContext);
+
+    let component = ""
+        
+
 
     const logout = () => {
         localStorageService.removeToken()
         props.setRole('guest')
-
     }
-
-
-
 
     useEffect(() => {
         const token = localStorageService.getToken()
         if (token) {
             const user = jwtDecode(token)
             setName(user.name)
+            setStatus(user.status)
         }
     }, [])
+    console.log(status)
+
+
+
+    if (status === "admin") {
+        component = (
+            <Col span={2}>
+                <Link to='/admin' >
+                    <Row >
+                        <Col style={{
+                            justifyContent: "center",
+                            width: "100px",
+                            textAlign: "center",
+                            marginTop: "3px"
+                        }}>
+                            <Avatar size="small" icon={<UserOutlined />} />
+                            <div>{name}</div>
+                        </Col>
+                    </Row>
+                </Link>
+            </Col>
+        )
+    } else {
+        component =
+            (<><Col span={2}>
+                <Link to='/history' >
+                    <Row >
+                        <Col style={{
+                            justifyContent: "center",
+                            width: "100px",
+                            textAlign: "center",
+                            marginTop: "3px"
+                        }}>
+                            <Avatar size="small" icon={<UserOutlined />} />
+                            <div>{name}</div>
+                        </Col>
+                    </Row>
+                </Link>
+            </Col>
+                <Col span={2}>
+                    <Link to="/cart" >
+                        <ShoppingCartOutlined className="cartIcon" style={{ fontSize: '30px', color: "white", marginLeft: "15px" }} />
+                    </Link>
+                </Col>
+            </>)
+    }
 
     return (
         <Row gutter={24} className="header" >
@@ -41,7 +87,6 @@ function Header(props) {
                     <Row style={{ justifyContent: "center", textAlign: "center" }}>
                         <img className="header_logo"
                             src="https://i.ibb.co/dPQT5GK/pngegg.png" alt="pngegg" border="0" style={{ width: "50%" }} />
-
                     </Row>
                 </Link>
             </Col>
@@ -53,31 +98,18 @@ function Header(props) {
                     onSearch={value => setSearchTerm(value)}
                 />
             </Col>
-          
-            <Col span={2}>
-                <Link to='/history' >
-                    <Row >
-                        <Col style={{
-                            justifyContent: "center",
-                            width: "100px",
-                            textAlign: "center",
-                            marginTop: "3px"
-                        }}>
-                        <Avatar size="small" icon={<UserOutlined />} />
-                            <div>{name}</div>
-                        </Col>
-                    </Row>
 
-                </Link>
-            </Col>
-            <Col span={2} >
-                <Link to="/cart" >
-                    <ShoppingCartOutlined className="cartIcon" style={{ fontSize: '30px' ,color: "white",marginLeft:"15px"}} />
-                </Link>
-            </Col>
-            <Col span={2}>
+            {component}
+
+            <Col span={2} style={{
+                justifyContent: "center",
+                width: "100px",
+                textAlign: "center",
+                marginTop: "3px"
+            }}>
                 <Link to="/login" onClick={logout}>
                     <LogoutOutlined className="logoutButton" style={{ color: "red", fontSize: '25px' }} />
+
                 </Link>
             </Col>
         </Row >

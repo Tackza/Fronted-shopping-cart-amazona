@@ -10,18 +10,18 @@ const layout = {
     wrapperCol: { xs: 24, sm: 19, md: 20, lg: 19, xl: 20, xxl: 21 },
 };
 
-function Login(props) {
+function LoginForAdmin(props) {
 
     const onFinish = (values) => {
         const body = {
             username: values.username,
             password: values.password
         }
-        axios.post('/user/login', body)
+        axios.post('/user/login/admin', body)
             .then(result => {
                 localStorageService.setToken(result.data.accessToken)
                 console.log(result.data)
-                props.setRole('user')
+                props.setRole('admin')
             })
             .catch(err => {
                 notification.error({
@@ -57,7 +57,7 @@ function Login(props) {
                         className="loginUsername"
                         
                         >
-                        <h1 style={{marginTop : "20px"}}>Sign-In</h1>
+                        <h1 style={{marginTop : "20px"}}>Sign-In Admin</h1>
                             <Form.Item
                                 name="username"
                                 rules={[{ required: true, message: 'Please input your username!' }]}
@@ -80,29 +80,11 @@ function Login(props) {
                             </Form.Item>
 
                             <Row style={{ marginLeft: '80px' }} >
-                                <Button className="login-form-button"  htmlType="submit" style={{ width: '300px' ,backgroundColor:"orange",color: "white"}}>
+                                <Button className="login-form-button"  htmlType="submit" style={{ width: '300px' ,backgroundColor:"blue",color: "white"}}>
                                     Continue
                                 </Button>
                             </Row>
                         </Form>
-                        <br />
-                        <Divider plain>New To Amazona</Divider>
-                        <Row style={{ marginLeft: "5px" }}>
-                            <Link to="/register">
-                                <Button className="Button" htmlType="submit" style={{width : "300px",backgroundColor :"gray",color: "white"}}>
-                                    Create your Amazona account
-                                    </Button>
-                            </Link>
-                        </Row>
-                        <br />
-                        <br />
-                        <Row style={{ marginLeft: "5px" }}>
-                            <Link to="/login/admin">
-                                <Button className="Button" htmlType="submit" style={{width : "300px",backgroundColor :"blue",color: "white"}}>
-                                    Login For Admin
-                                    </Button>
-                            </Link>
-                        </Row>
                     </Row>
                 </div>
             </Col>
@@ -110,4 +92,4 @@ function Login(props) {
     )
 }
 
-export default withRouter(Login)
+export default LoginForAdmin

@@ -5,6 +5,7 @@ import Meta from 'antd/lib/card/Meta'
 
 function Product(props) {
     const {  image, name, price  } = props.item;
+   
 
     return (
 
@@ -15,7 +16,7 @@ function Product(props) {
         >
             <Meta title={name} />
             <p>ราคา {Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(price)} </p>
-            <Button onClick={() => props.addToOrder(props.item)}>Add To Cart</Button>
+            <Button onClick={()=>props.addToOrder(props.item)} >Add To Cart</Button>
         </Card>
 
     )

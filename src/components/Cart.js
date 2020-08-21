@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from '../config/axios'
 import { Button, Avatar, List, Row, Col, Card } from 'antd'
 import Header from './Header'
 import { Link } from 'react-router-dom'
+import { SearchContext } from '../contexts/SearchContext'
 
-let id = 1
+
 const gridStyle = {
     width: '180%',
     textAlign: 'center',
@@ -13,7 +14,9 @@ const gridStyle = {
 function Cart(props) {
     const [cart, setCart] = useState([])
     const [total, setTotal] = useState(0)
-    
+
+    let { test } = useContext(SearchContext)
+
 
     const fetchListOrder = async () => {
         const cart = await axios.get('/cart');
@@ -32,9 +35,8 @@ function Cart(props) {
             amount: item.amount,
             price: item.Product.price,
             user_id: item.user_id,
-            product_id : item.Product.id
+            product_id: item.Product.id
         }))
-
         const deleteAllOrder = await axios.delete('/cart')
         console.log("delete success")
         console.log(cart)
@@ -51,14 +53,19 @@ function Cart(props) {
 
     useEffect(() => {
         fetchListOrder()
-       
     }, [])
-    console.log(cart)
+
+
+    const allClick = () => {
+        test = true
+        console.log(test)
+        orderConfirm(cart)
+    }
 
     return (
         <div>
             <Header setRole={props.setRole} />
-            
+
             <Row justify='center' >
                 <Col offset={1} xs={13}>
 
@@ -75,7 +82,7 @@ function Cart(props) {
                                     description={`amount : ${item.amount} 
                                     price : ${Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(item.Product.price)} `}
                                 />
-                                <Button type="danger" onClick={() => deleteOrder(item.id)}>Delete </Button>
+                                <Button type="danger" onClick={() => deleteOrder(item.id)} >Delete </Button>
                             </List.Item>
                         )}
                     />
@@ -88,7 +95,7 @@ function Cart(props) {
                             <Card title="Total product" bordered={false} style={gridStyle}>
                                 <p>total : {Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(total)}  </p>
                                 <Link to='/success'>
-                                 <Button type="primary" onClick={() => orderConfirm(cart)}>Confirm Order</Button>
+                                    <Button type="primary" onClick={allClick} disabled={total>1 ? false : true}>Confirm Order</Button>
                                 </Link>
                             </Card>
                         </div>,

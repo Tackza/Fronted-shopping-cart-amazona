@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Result } from 'antd'
 import { withRouter } from 'react-router-dom';
+import { SearchContext } from '../contexts/SearchContext'
 
 
 function BuySuccess(props) {
-    setTimeout(()=>props.history.push('/'), 3000);
+    let {test} = useContext(SearchContext)
+    const allFn = () => {
+        props.history.push('/')
+        test = true
+    }
+    setTimeout(allFn, 3000);
     return (
         <div>
             <Result
